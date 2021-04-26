@@ -10,6 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_04_26_162529) do
+
+  create_table "url_shorteners", force: :cascade do |t|
+    t.string "original"
+    t.string "short_version"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["original"], name: "index_url_shorteners_on_original"
+  end
 
 end
