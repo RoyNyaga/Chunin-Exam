@@ -4,8 +4,10 @@ class UrlShortenersController < ApplicationController
   end
   
   def create 
-    @url = UrlShortener.new(url_shorteners)
-    if @url.save 
+    @url = UrlShortener.new(url_shortener_params)
+    if @url.valid?
+      @url.add_shortform
+      byebug
       @url.save
       flash.now[:success] = "successfully created url short form"
       render "index"
@@ -18,6 +20,6 @@ class UrlShortenersController < ApplicationController
   private 
 
   def url_shortener_params 
-    params.require(:url_shortner).permit(:original, :short_version)
+    params.require(:url_shortener).permit(:original, :short_version)
   end 
 end
