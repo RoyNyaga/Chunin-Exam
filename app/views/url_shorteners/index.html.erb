@@ -1,1 +1,6 @@
 <h1>This is url shortener home page</h1>
+
+<%= form_with model: @url do |form| %>
+  <%= form.text_field :original %>
+  <%= form.submit %>
+<% end %>
