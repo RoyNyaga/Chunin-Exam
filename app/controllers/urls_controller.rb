@@ -1,10 +1,10 @@
-class UrlShortenersController < ApplicationController
+class UrlsController < ApplicationController
   def index
-    @url = UrlShortener.new
+    @url = Url.new
   end
   
   def create 
-    @url = UrlShortener.new(url_shortener_params)
+    @url = Url.new(url_shortener_params)
     if @url.valid?
       @url.add_shortform
       @url.save
@@ -19,6 +19,6 @@ class UrlShortenersController < ApplicationController
   private 
 
   def url_shortener_params 
-    params.require(:url_shortener).permit(:original, :short_version)
+    params.require(:url).permit(:original, :short_version)
   end 
 end

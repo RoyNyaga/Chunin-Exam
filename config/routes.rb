@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
-  root "url_shorteners#index"
+  root "urls#index"
 
-  resources :url_shorteners
+  resources :urls
 
 end

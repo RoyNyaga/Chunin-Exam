@@ -1,5 +1,5 @@
 <h1>This is url shortener home page</h1>
-<% UrlShortener.all.each do |url| %>
+<% Url.all.each do |url| %>
   <%= url.original %> <br>
 <% end %>
 <%= form_with model: @url do |form| %>

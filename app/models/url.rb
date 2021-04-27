@@ -1,4 +1,4 @@
-class UrlShortener < ApplicationRecord
+class Url < ApplicationRecord
 
   def add_shortform 
     self.short_version = "#{extract_protocol_and_domain}#{SecureRandom.hex(2)}"
