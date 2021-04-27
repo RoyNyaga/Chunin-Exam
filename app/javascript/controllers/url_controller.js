@@ -12,11 +12,13 @@ export default class extends Controller {
     fetch("/urls", {
       method: 'post',
       headers: {
-        "X-CSRF-TOKEN": token
+        "X-CSRF-TOKEN": token,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
       },
-      body: { url:{ "original": this.originalTarget.value } }
+      body: JSON.stringify({ "original": this.originalTarget.value })
     })
-    .then(json)
+    // .then(json)
     .then(function (data) {
       console.log('Request succeeded with JSON response', data);
     })
