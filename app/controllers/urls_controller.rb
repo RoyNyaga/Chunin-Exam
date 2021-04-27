@@ -4,16 +4,17 @@ class UrlsController < ApplicationController
   end
   
   def create 
-    @url = Url.new(url_shortener_params)
-    if @url.valid?
-      @url.add_shortform
-      @url.save
-      flash.now[:success] = "successfully created url short form"
-      render "index"
-    else
-      flash.now[:warning] = "could not create shortenner for the following reasons"
-      render "index"
-    end 
+    byebug
+    # @url = Url.new(url_shortener_params)
+    # if @url.valid?
+    #   @url.add_shortform
+    #   @url.save
+    #   flash.now[:success] = "successfully created url short form"
+    #   render "index"
+    # else
+    #   flash.now[:warning] = "could not create shortenner for the following reasons"
+    #   render "index"
+    # end 
   end
   
   private 
