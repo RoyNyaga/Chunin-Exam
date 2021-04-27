@@ -7,7 +7,6 @@ class UrlShortenersController < ApplicationController
     @url = UrlShortener.new(url_shortener_params)
     if @url.valid?
       @url.add_shortform
-      byebug
       @url.save
       flash.now[:success] = "successfully created url short form"
       render "index"
