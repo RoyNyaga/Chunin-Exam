@@ -4,22 +4,21 @@ class UrlsController < ApplicationController
   end
   
   def create 
+    @url = Url.new(url_params)
+    if @url.valid?
+      @url.add_shortform
+      @url.save
+      flash.now[:success] = "successfully created url short form"
+      render json: { url: @url }
+    else
+      render json: { errors: @url.errors.full_messages }
+    end
     byebug
-    # @url = Url.new(url_shortener_params)
-    # if @url.valid?
-    #   @url.add_shortform
-    #   @url.save
-    #   flash.now[:success] = "successfully created url short form"
-    #   render "index"
-    # else
-    #   flash.now[:warning] = "could not create shortenner for the following reasons"
-    #   render "index"
-    # end 
   end
   
   private 
 
-  def url_shortener_params 
+  def url_params 
     params.require(:url).permit(:original, :short_version)
   end 
 end
