@@ -60,3 +60,25 @@ input{
   justify-content: space-around;
   margin-top: 10px;
 }
+
+#loading-div{
+  height: 100vh;
+  width: 100%;
+  display: none; 
+  justify-content: center;
+  align-items: center;
+  background: rgba(222, 184, 135, 0.767);
+  position: fixed;
+}
+
+#loading-img{
+  width: 30%;
+  position: relative;
+  right: 140px;
+}
+
+h4{
+  position: relative;
+  right: 185px;
+  margin-top: 10px;
+}

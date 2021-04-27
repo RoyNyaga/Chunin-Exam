@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "original" ]
+  static targets = [ "original", "originalUrl" ]
 
   connect(){
     // console.log(test)
@@ -37,8 +37,18 @@ export default class extends Controller {
     const urlText = document.createTextNode(original)
     paragraph.appendChild(urlText)
     urlDiv.appendChild(paragraph)
-
   }
 
+  redirect = () => {
+    const loadingDiv = document.querySelector("#loading-div")
+    loadingDiv.style.display = "flex"
+    setTimeout(this.loading, 3000)
+  }
+
+  loading = () => {
+    const loadingDiv = document.querySelector("#loading-div")
+    window.location.href = this.originalUrlTarget.id
+    loadingDiv.style.display = "none"
+  }
 
 }

@@ -12,11 +12,18 @@
 
   <body>
     <%#= render "layouts/flash_message" %>
+
     <div id="left-side-bar">
       <div>content</div>
     </div>
     
     <div id="main-side-bar">
+      <div id="loading-div">
+        <div>
+          <%=image_tag("loading.gif", id: "loading-img")%>
+          <h4>Redirecting to original url. . . .</h4>
+        </div>
+      </div>
       <%= yield %>
     </div>
   </body>

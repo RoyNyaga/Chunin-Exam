@@ -12,9 +12,9 @@
     <div id="url-list-div">
       <% Url.all.each do |url| %>
         <div class="url-div">
-          <p data-originalUrl-target=<%= url.original %> class="url-original-divs"><%= url.short_version %><p>
+          <p data-url-target="originalUrl" id=<%= url.original %> class="url-original-divs"><%= url.short_version %><p>
           <div class="button-div">
-            <button>Redirect</button> <button>see more</button>
+            <button data-action="url#redirect">Redirect</button> <button>see more</button>
           </div>
         </div>
       <% end %>
