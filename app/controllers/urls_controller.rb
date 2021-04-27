@@ -13,7 +13,6 @@ class UrlsController < ApplicationController
     else
       render json: { errors: @url.errors.full_messages }
     end
-    byebug
   end
   
   private 

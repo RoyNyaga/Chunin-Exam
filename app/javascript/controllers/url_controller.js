@@ -3,12 +3,14 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = [ "original" ]
 
+  connect(){
+    // console.log(test)
+  }
+
   submitForm(e){
     const token = document.querySelector('[name=csrf-token]').content
     const data = { "original": this.originalTarget.value }
     e.preventDefault();
-    console.log(token)
-    console.log( this.originalTarget.value )
 
     fetch("/urls", {
       method: 'post',
@@ -21,10 +23,22 @@ export default class extends Controller {
     })
     .then(response => response.json(data))
     .then(result => {
-      console.log("this is result", result)
+      const { original } = result.url
+      this.addElement(original)
     })
     .catch(function (error) {
       console.log('Request failed', error);
     });
   }
+
+  addElement = (original) => {
+    const urlDiv = document.querySelector('#url-list-div')
+    const paragraph = document.createElement("p");
+    const urlText = document.createTextNode(original)
+    paragraph.appendChild(urlText)
+    urlDiv.appendChild(paragraph)
+
+  }
+
+
 }
