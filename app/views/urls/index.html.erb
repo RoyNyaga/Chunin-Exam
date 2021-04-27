@@ -11,19 +11,22 @@
 
     <div id="url-list-div">
       <% Url.all.each do |url| %>
-        <div class="url-div">
-          <p data-url-target="originalUrl" id=<%= url.original %> class="url-original-divs"><%= url.short_version %><p>
+        <div class="url-div" data-url-target="urlDiv">
+          <p data-url-target="originalUrl"
+            data-shortVersionUrl=<%= url.short_version %>
+            data-createdAt=<%= url.created_at %>
+            data-originalUrl=<%= url.original %> 
+            key=<%= url.id %> class="url-original-divs"
+          >
+            <%= url.short_version %>
+          <p>
           <div class="button-div">
-            <button data-action="url#redirect">Redirect</button> <button>see more</button>
+            <button data-action="url#redirect">Redirect</button> 
+            <button id="see-more-btn" data-action="url#showDetails">see more</button>
           </div>
         </div>
       <% end %>
     </div>
   </div>
-
-<%#= form_with model: @url do |form| %>
-  <%#= form.text_field :original %>
-  <%#= form.submit %>
-<%# end %>
 </div>
 
