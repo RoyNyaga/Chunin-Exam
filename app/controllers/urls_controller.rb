@@ -8,9 +8,13 @@ class UrlsController < ApplicationController
     if @url.valid?
       @url.save
       flash.now[:success] = "successfully created url short form"
-      render json: { url: @url }
+      render status: 201, json: { 
+        url: @url 
+      }
     else
-      render json: { errors: @url.errors.full_messages }
+      render status: 400, json: {
+         errors: @url.errors.full_messages 
+        }
     end
   end
   
