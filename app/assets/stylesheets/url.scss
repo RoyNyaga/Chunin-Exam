@@ -4,7 +4,7 @@
 }
 
 body{
-  background: red;
+  background: bisque;
 }
 
 h1{
@@ -85,4 +85,24 @@ h4{
 
 #close-btn{
   display: none;
+}
+
+.error-messages{
+  text-align: center;
+  color: rgb(230, 77, 6)
+}
+
+.success-message{
+  color: #33c133;
+  text-align: center;
+}
+
+.side-bar-p{
+  color: #9e5d08;
+  font-size: 0.8em;
+  margin: 5px 0;
+}
+
+.emojies{
+  font-size: 1em;
 }

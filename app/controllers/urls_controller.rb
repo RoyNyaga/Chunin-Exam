@@ -5,14 +5,14 @@ class UrlsController < ApplicationController
   
   def create 
     @url = Url.new(url_params)
-    if @url.valid?
-      @url.save
-      flash.now[:success] = "successfully created url short form"
+    if @url.save
       render status: 201, json: { 
+        status: "success",
         url: @url 
       }
     else
-      render status: 400, json: {
+      render json: {
+        status: "failed",
          errors: @url.errors.full_messages 
         }
     end
