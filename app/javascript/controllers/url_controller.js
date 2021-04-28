@@ -36,7 +36,6 @@ export default class extends Controller {
     const urlDiv = document.createElement("div")
     urlDiv.setAttribute("class", "url-div")
     urlDiv.innerHTML = this.creatOriginalUrlParagraph(url) + this.createButtonDive()
-    // urlDiv.appendChild(this.createButtonDive())
     urlListDiv.appendChild(urlDiv)
   }
 
@@ -50,80 +49,99 @@ export default class extends Controller {
   }
 
   creatOriginalUrlParagraph = (url) =>{
+    const { short_version, created_at, original, id } = url 
     return `
       <p data-url-target="originalUrl"
-        data-shortVersionUrl=${url.short_version}
-        data-createdAt=${url.created_at}
-        data-originalUrl=${url.original}
-        key=${url.id} class="url-original-divs"
+        data-shortVersionUrl=${short_version}
+        data-createdAt=${created_at}
+        data-originalUrl=${original}
+        key=${id} class="url-original-divs"
       >
-        ${url.short_version}
+        ${short_version}
       </p>
     `
   }
 
-  redirect = () => {
+  redirect = (e) => {
     const loadingDiv = document.querySelector("#loading-div")
-    loadingDiv.style.display = "flex"
-    setTimeout(this.loading, 3000)
+    // e.path is not supported in safari and firefox, use e.compoasedPath() where e.path is not supported
+    let path = e.path || (e.composedPath && e.composedPath());
+    if (path) {
+      const urlDiv = path[2]
+      const targetedElement = urlDiv.childNodes[1]
+      const url = targetedElement.dataset.originalurl
+      this.startLoading(loadingDiv)
+      setTimeout(this.changeLocation, 2000, url)
+      setTimeout(this.endLoading, 3000, loadingDiv)
+    }else{ alert("Please use a supported browser for this feature, chrome, safari or firefox")}
   }
 
-  loading = () => {
-    const loadingDiv = document.querySelector("#loading-div");
-    const url = this.originalUrlTarget.dataset.originalurl;
-    window.location.href = url;
+  changeLocation = (url) => {
+    window.location.href = url
+  }
+
+  startLoading = (loadingDiv) => {
+    loadingDiv.style.display = "flex"
+  }
+
+  endLoading = (loadingDiv) => {
     loadingDiv.style.display = "none";
   };
 
   showDetails = (e) => {
-    const urlDiv = e.path[2]
-    const buttonDiv = e.path[1]
-    const seeMoreBtn = e.target
-    const targetedElement = urlDiv.childNodes[1]
-    const detailDiv = document.createElement("div");
-    const originalP = document.createElement("p");
- 
-    const originalPText = targetedElement.dataset.originalurl;
-    originalP.innerHTML = originalPText;
+    let path = e.path || (e.composedPath && e.composedPath());
+    if (path) {
+      const urlDiv = path[2]
+      const buttonDiv = path[1]
+      const seeMoreBtn = e.target
+      const targetedElement = urlDiv.childNodes[1]
+      const detailDiv = this.createDetailDiv(targetedElement)
+      urlDiv.appendChild(detailDiv)
+      this.removeShowDetailBtn(buttonDiv, seeMoreBtn)
+    }else{ alert("Please use a supported browser for this feature, chrome, safari or firefox")}
+  };
 
-    const shortP = document.createElement("p");
-    const shortPText = targetedElement.dataset.shortversionurl;
-    shortP.innerHTML = shortPText;
-
-    detailDiv.appendChild(originalP);
-    detailDiv.appendChild(shortP)
-    urlDiv.appendChild(detailDiv)
-
-    const dateP = document.createElement("p")
-    const datePText = targetedElement.dataset.createdat
-    dateP.innerHTML = `created on: ${datePText}`
-    detailDiv.appendChild(dateP)
-
-    detailDiv.setAttribute("style", "margin-top: 10px;")
-
-
+  removeShowDetailBtn = (buttonDiv, seeMoreBtn) => {
     const closeBtn = document.createElement("button")
     closeBtn.innerHTML = "close detail view"
     closeBtn.setAttribute("data-action", "url#closeDetails")
     buttonDiv.appendChild(closeBtn)
     buttonDiv.removeChild(seeMoreBtn)
-
-  };
+    buttonDiv = buttonDiv
+  }
 
   closeDetails = (e) => {
-    const urlDiv = e.path[2]
-    const closeBtn = e.target
+    let path = e.path || (e.composedPath && e.composedPath());
+    if (path) {
+      const urlDiv = path[2]
+      const closeBtn = e.target
+      const buttonDiv = path[1]
+      const detailDiv = path[2].childNodes[5]
+      urlDiv.removeChild(detailDiv)
+      this.removeCloseDetailBtn(buttonDiv, closeBtn)
+    }else{alert("Please use a supported browser for this feature, chrome, safari or firefox")}
+  }
 
-    const detailDiv = e.path[2].childNodes[5]
-    urlDiv.removeChild(detailDiv)
-
-    const buttonDiv = e.path[1]
-    buttonDiv.removeChild(closeBtn)
-    
+  removeCloseDetailBtn = (buttonDiv, closeBtn) => {
     const seeMoreBtn = document.createElement("button")
     seeMoreBtn.innerHTML = "see more"
     seeMoreBtn.setAttribute("data-action", "url#showDetails")
-    buttonDiv.appendChild(seeMoreBtn)
+    buttonDiv.appendChild(seeMoreBtn)  
+    buttonDiv.removeChild(closeBtn)
+  }
+
+  createDetailDiv = (targetedElement) => {
+    const { shortversionurl, originalurl, createdat } = targetedElement.dataset
+
+    const detailDiv = document.createElement("div");
+    detailDiv.setAttribute("style", "margin-top: 10px;")
+    const paragraphTags = ` 
+      <p>${originalurl}</p>
+      <p>${shortversionurl}</p>
+      <p>Created on: ${createdat}</p>
+      `
+    detailDiv.innerHTML = paragraphTags
+    return detailDiv
   }
 
 };
