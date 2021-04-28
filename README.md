@@ -1,100 +1,49 @@
-# Helpjuice Chunin Exam
+#URL SHORTENER
+<img src="https://res.cloudinary.com/it-s-tech/image/upload/v1619627071/Screen_Shot_2021-04-28_at_17.27.37_hwkucm.png">
 
-Welcome to the Helpjuice code challenge. This repository includes a new Rails app used for assessment and testing purposes only.
+### About
+This application comes in handy when you want to encrypt the path of URLs. It creates a short version of URLs and allows you to get redirected to the original URL through a redirect button.
+It also allows you to see detailed information on previously created URLs.
 
-## Context
+### My approach
+I created a Url model to persis URLs in the database to keep a track of records. To avoid page load, I architect the application to be similar to a single page application. I used the fetch API for making the post request and updating URLs behind the wood. I realized redirecting to the original URL on URL creation will not provide room to see URL records after they are created so I decided to separate the creation and redirection processes such that users can see the short form of the URLs they create and click on the redirect button to get redirected to the original site.
 
-[Helpjuice](https://www.helpjuice.com/) provides a reasonable overview and description of who are we and what we do.
+# Issues I encountered
+1. For a consistent flow of the user experience, I wanted to redirect to a new browser window but I realized some browsers block such redirections especially when it comes from an unsecured source so I had no choice but to redirect on the same window.
 
-Helpjuice empowers large and small companies (such as Amazon.com, Hertz, Virgin Mobile, Shipt.com, Philips, US Government, and thousands of others) to deliver instant support using our software.
+### Technologies
+- Ruby 2.6.5
+- Rails 6.1.3
+- Rspec
+- Capybara
+- Factory_bot
+- Stimulus
+- Javascript ES6
 
-We're a smaller, yet growing software company, where everyone wears multiple hats. It's a team of excellent people, who are all willing to help each other because it's the way we work / our culture.
-
-We care about our customers and are a very transparent company in how we build software (e.g.: our product roadmap is public & customer-driven)
-
-
-## Getting Started
-
-```bash
-# Start your Rails server
-rails server
-
-# In a separate tab
-bin/webpack-dev-server
+### Installation And Usage
+* Fork the project to your personal Github.
+* Clone the challenge to your local from your new forked repo in your git account.
 ```
+  git clone <forked account>
+  example: git clone https://github.com/EmirVatric/Chunin-Exam
+```
+* Cd into the project directory and install gems using the command:
+```
+bundle install
+```
+* Start the development server by running the command:
+``` 
+rails s
+```
+* visit http://localhost:3000 to view the application on the browser.
 
-## Tasks
+### Testing
 
-### 1. Build a URL shoretner app
-
-A URL shortener is an online application that converts a regular URL into its condensed format.
-
-The user only has to copy the full URL of a website and paste it into the URL shortening tool to come up with an abbreviated version that is around 10 to 20 characters long.
-
-Example:
-
-Regular URL - http://www.nytimes.com/2012/08/09/us/more-casinos-and-internet-gambling-threaten-shakopee-tribe.html?_r=1&hp
-
-Shortened URL - http://`your-domain`/P7eg6B
-
-Shortened URL then redirects to the original URL.
-
-**Plus points for challengers are able to track as much of analytics as possible!**
-
-### 2. Stimulus
-
-Install and use stimulus to show off some of that JavaScript magic.
-
-Please try to put as much of your JavaScript into Stimulus controllers as possible!
-
-### 3. Specs
-
-Install and configure RSpec and Capybara to test your coode.
-
-**Plus points for challengers with best code coverage!**
-
-### 4. Write documentation
-
-Rewrite this readme to describe your app and explain your approuch. Give as much info to the reviewers as possible!
-
-## Tips
-
-- Submit your PR as you would in a professional environment
-- Keep your commit history and your diffs clean
-- Try to write clean code
-
-## How do I submit a Pull Request?
-
-Since this a public repository, submitting a Pull Request will not be the same as when you're a collaborator. The instructions below will help you push the changes to the repo.
-
-- Fork the project to your personal Github.
-- Clone the challenge to your local from your new forked repo in your personal git account.
-
-  ```
-    git clone <forked account>
-
-    example: git clone https://github.com/EmirVatric/Chunin-Exam
-  ```
-
-- Any changes made in the original repository should not be synced to your forked repository. The following commands enable us to track the original repository as a remote of the fork.
-
-   ```
-     git remote add --track master upstream https://github.com/EmirVatric/Chunin-Exam.git
-     git fetch upstream
-   ```
-
-- Create a new branch for your changes.
-
-   ```
-    git checkout -b <your-branch-name> upstream/master
-   ```
-
-- Make your changes, stage, and commit files necessary.
-- Push the changes to remote.
-
-  ```
-   git push -u origin <your-branch-name> origin
-  ```
-
-- You can now go to Github, and submit a PR with necessary details.
-- Happy Coding! Please don't hesitate to shoot an email to the recruitment team if you have any issues while pushing the code.
+* For unit test, run:
+```
+rspec spec/models
+```
+* To test features:
+```
+rspec spec/features
+```
