@@ -6,7 +6,6 @@ class UrlsController < ApplicationController
   def create 
     @url = Url.new(url_params)
     if @url.valid?
-      @url.add_shortform
       @url.save
       flash.now[:success] = "successfully created url short form"
       render json: { url: @url }
