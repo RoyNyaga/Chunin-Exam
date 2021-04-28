@@ -23,20 +23,43 @@ export default class extends Controller {
     })
     .then(response => response.json(data))
     .then(result => {
-      const { original } = result.url
-      this.addElement(original)
+      const { url } = result
+      this.addElement(url)
     })
     .catch(function (error) {
       console.log('Request failed', error);
     });
   }
 
-  addElement = (original) => {
-    const urlDiv = document.querySelector('#url-list-div')
-    const paragraph = document.createElement("p");
-    const urlText = document.createTextNode(original)
-    paragraph.appendChild(urlText)
-    urlDiv.appendChild(paragraph)
+  addElement = (url) => {
+    const urlListDiv = document.querySelector("#url-list-div")
+    const urlDiv = document.createElement("div")
+    urlDiv.setAttribute("class", "url-div")
+    urlDiv.innerHTML = this.creatOriginalUrlParagraph(url) + this.createButtonDive()
+    // urlDiv.appendChild(this.createButtonDive())
+    urlListDiv.appendChild(urlDiv)
+  }
+
+  createButtonDive = () => {
+    return`
+      <div class="button-div">
+        <button data-action="url#redirect">Redirect</button> 
+        <button id="see-more-btn" data-action="url#showDetails">see more</button>
+      </div>
+    `
+  }
+
+  creatOriginalUrlParagraph = (url) =>{
+    return `
+      <p data-url-target="originalUrl"
+        data-shortVersionUrl=${url.short_version}
+        data-createdAt=${url.created_at}
+        data-originalUrl=${url.original}
+        key=${url.id} class="url-original-divs"
+      >
+        ${url.short_version}
+      </p>
+    `
   }
 
   redirect = () => {
