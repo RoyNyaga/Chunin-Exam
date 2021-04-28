@@ -15,15 +15,15 @@
             <%= url.short_version %>
           <p>
           <div class="button-div">
-            <button data-action="url#redirect">Redirect</button> 
-            <button id="see-more-btn" data-action="url#showDetails">see more</button>
+            <button type="button" data-action="url#redirect">Redirect</button> 
+            <button type="button" id="see-more-btn" data-action="url#showDetails">see more</button>
           </div>
         </div>
       <% end %>
     </div>
 
-    <div id="create-url-form-div" >
-      <form data-action="url#submitForm" accept-charset="UTF-8" method="post">
+    <div id="create-url-form-div">
+      <form id="url-form-div" data-action="url#submitForm" accept-charset="UTF-8" method="post">
         <input data-url-target="original" type="text" name="url[original]" id="url_original" class="">
         <input type="submit" name="commit" value="Create Url">
       </form>
