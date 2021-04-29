@@ -8,7 +8,10 @@ class UrlsController < ApplicationController
 
   def redirect_url 
     track_url_clicks(@url.id)
-    redirect_to @url.original
+    render json: {
+      status: "tracked",
+      url: @url,
+    }
   end 
   
   def create 
@@ -29,7 +32,7 @@ class UrlsController < ApplicationController
   private 
 
   def set_url 
-    @url = params[:id]
+    @url = Url.find_by(params[:id])
   end 
 
 
