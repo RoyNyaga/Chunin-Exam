@@ -80,7 +80,8 @@ export default class extends Controller {
     return`
       <div class="button-div">
         <button data-action="url#redirect">Redirect</button> 
-        <button id="see-more-btn" data-action="url#showDetails">see more</button>
+        <button type="button" id="see-more-btn" data-action="url#urlDetailPage">see analtics</button>
+        <button id="see-more-btn" data-action="url#showDetails">see original url</button>
       </div>
     `
   };
@@ -112,19 +113,6 @@ export default class extends Controller {
       setTimeout(this.redirectRequest, 2000, id)
       this.redirectRequest(id)
     }else{ alert("Please use a supported browser for this feature, chrome, safari or firefox") }
-
-
-
-    // e.path is not supported in safari and firefox, use e.compoasedPath() where e.path is not supported
-    // let path = e.path || (e.composedPath && e.composedPath());
-    // if (path) {
-    //   const urlDiv = path[2];
-    //   const targetedElement = urlDiv.childNodes[1];
-    //   const url = targetedElement.dataset.originalurl;
-    //   this.startLoading(loadingDiv);
-    //   setTimeout(this.changeLocation, 2000, url);
-    //   setTimeout(this.endLoading, 3000, loadingDiv);
-    // }else{ alert("Please use a supported browser for this feature, chrome, safari or firefox")}
 
   };
 
@@ -195,5 +183,16 @@ export default class extends Controller {
     detailDiv.innerHTML = paragraphTags;
     return detailDiv
   };
+
+  urlDetailPage = (e) => {
+    let path = e.path || (e.composedPath && e.composedPath());
+    if (path) {
+      const urlDiv = path[2];
+      const targetedElement = urlDiv.childNodes[1];
+      const id = targetedElement.attributes.key.value
+      window.location.href = `/urls/${id}`
+    }else{alert("Please use a supported browser for this feature, chrome, safari or firefox")}
+    
+  }
 
 };

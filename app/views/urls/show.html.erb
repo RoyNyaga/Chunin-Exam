@@ -9,7 +9,7 @@
       <li class="list-item" >
       <span class="click-num"><%= @count %></span>
         <div class="list-inner-item-div first-element">
-          <span>Time:</span><span class="event-value"><%= event.time %></span>
+          <span>Date & Time:</span><span class="event-value"><%= event.time.strftime("clicked on %m/%d/%Y at %I:%M%p") %></span>
         </div>
         <div class="list-inner-item-div">
           <span>Browser:</span><span class="event-value"><%= @visit.browser %></span>
