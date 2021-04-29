@@ -1,10 +1,14 @@
 class UrlsController < ApplicationController
 
-  before_action :set_url, only: [:redirect_url]
+  before_action :set_url, only: [:redirect_url, :show]
 
   def index
     @url = Url.new
   end
+
+  def show 
+    @events = Ahoy::Event.where(name: "#{@url.id}")
+  end 
 
   def redirect_url 
     track_url_clicks(@url.id)
@@ -32,7 +36,7 @@ class UrlsController < ApplicationController
   private 
 
   def set_url 
-    @url = Url.find_by(params[:id])
+    @url = Url.find_by(id: params[:id])
   end 
 
 

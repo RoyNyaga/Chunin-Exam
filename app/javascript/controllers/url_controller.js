@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = [ "original", "originalUrl", "urlDiv", "messageDiv" ];
 
   redirectRequest = (id) => {
-    const token = document.querySelector('[name=csrf-token]').content;
+    console.log("axios", id)
     Axios.get(`redirect/url/${id}`)
     .then(response => {
       const { status, url } = response.data
@@ -110,6 +110,7 @@ export default class extends Controller {
       const id = targetedElement.attributes.key.value
       setTimeout(this.endLoading, 4000, loadingDiv);
       setTimeout(this.redirectRequest, 2000, id)
+      this.redirectRequest(id)
     }else{ alert("Please use a supported browser for this feature, chrome, safari or firefox") }
 
 
