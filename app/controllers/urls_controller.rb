@@ -1,12 +1,15 @@
 class UrlsController < ApplicationController
 
-  before_action :set_url
+  before_action :set_url, only: [:redirect_url]
 
   def index
     @url = Url.new
   end
 
- 
+  def redirect_url 
+    track_url_clicks(@url.id)
+    redirect_to @url.original
+  end 
   
   def create 
     @url = Url.new(url_params)
