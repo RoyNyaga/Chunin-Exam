@@ -1,5 +1,32 @@
-<h1>This is how page</h1>
-<% @events.each do |event| %>
-  <%= @visit = event.name %>
-  <p><%#= @visit.browser %></p>
-<% end %>
+<div class="url-show-div-wrapper">
+  <div class="show-div-header">
+      <h1>Total number of clicks: <span class="click-num"><%= @total_num_of_clicks %></span></h1>
+  </div>
+
+  <ul class="list-div">
+    <% @events.each do |event| %>
+      <% @visit = event.visit %>
+      <li class="list-item" >
+      <span class="click-num"><%= @count %></span>
+        <div class="list-inner-item-div first-element">
+          <span>Time:</span><span class="event-value"><%= event.time %></span>
+        </div>
+        <div class="list-inner-item-div">
+          <span>Browser:</span><span class="event-value"><%= @visit.browser %></span>
+        </div>
+        <div class="list-inner-item-div">
+          <span>device type:</span><span class="event-value"><%= @visit.device_type %></span>
+        </div>
+        <div class="list-inner-item-div">
+          <span>Operating system: </span><span class="event-value"><%= @visit.os %></span>
+        </div>
+        <% if @visit.country %>
+          <div class="list-inner-item-div">
+            <span>Country</span><span class="event-value"><%= @visit.country %></span>
+          </div>
+        <% end %>
+      </li>
+      <% @count+=1 %>
+    <% end %>
+  </ul>
+</div>

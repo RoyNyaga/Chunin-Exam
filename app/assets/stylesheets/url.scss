@@ -106,3 +106,35 @@ h4{
 .emojies{
   font-size: 1em;
 }
+
+.url-show-div-wrapper{
+  padding: 50px 60px;
+}
+
+.list-div{
+  width: 60%;
+  margin: 40px auto;
+  list-style: none;
+}
+
+.list-item{
+  margin: 20px 0;
+}
+
+.list-inner-item-div{
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+  padding: 20px;
+}
+
+.first-element{
+  background: orange;
+  color: white;
+}
+
+.click-num{
+  padding: 20px;
+  background: orange;
+  border-radius: 50%;
+}

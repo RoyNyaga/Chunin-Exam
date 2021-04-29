@@ -8,6 +8,8 @@ class UrlsController < ApplicationController
 
   def show 
     @events = Ahoy::Event.where(name: "#{@url.id}")
+    @total_num_of_clicks = @events.count
+    @count = 1
   end 
 
   def redirect_url 
