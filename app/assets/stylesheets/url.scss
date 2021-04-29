@@ -138,3 +138,54 @@ h4{
   background: orange;
   border-radius: 50%;
 }
+
+.click-num-h1{
+  padding: 20px;
+  background: orange;
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: 900px) {
+
+  .click-num-h1{
+    position: relative;
+    top: 20px;
+  }
+
+  #left-side-bar{
+    display: none;
+  }
+
+  #main-side-bar{
+    margin: 0 auto;
+    padding: 0;
+
+  }
+
+  #url-index-div{
+    padding: 0;
+  }
+
+  .list-div{
+    margin: 0;
+    width: 100%;
+
+  }
+
+  .click-num-h1{
+  }
+
+  // .click-num{
+  //   position: relative;
+  //   top: 20px;
+    
+  // }
+
+  .url-show-div-wrapper{
+    padding: 0;
+  }
+
+  .list-item{
+    margin: 20px 0;
+  }
+}
