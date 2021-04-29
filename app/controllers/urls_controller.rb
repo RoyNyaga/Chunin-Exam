@@ -1,4 +1,6 @@
 class UrlsController < ApplicationController
+  skip_before_action :index
+
   def index
     @url = Url.new
   end
