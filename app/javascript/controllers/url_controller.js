@@ -10,7 +10,7 @@ export default class extends Controller {
     .then(response => {
       const { status, url } = response.data
       if (status == "tracked"){
-        window.location.href = `url`
+        window.location.href = `${url.original}`
       }else{ alert("error some where")}
     })
     
@@ -101,16 +101,15 @@ export default class extends Controller {
 
   redirect = (e) => {
     const loadingDiv = document.querySelector("#loading-div");
-    // this.startLoading(loadingDiv);
+    this.startLoading(loadingDiv);
     // e.path is not supported in safari and firefox, use e.compoasedPath() where e.path is not supported
     let path = e.path || (e.composedPath && e.composedPath());
     if (path) {
       const urlDiv = path[2];
       const targetedElement = urlDiv.childNodes[1];
       const id = targetedElement.attributes.key.value
-      // setTimeout(this.endLoading, 2000, loadingDiv);
-      // setTimeout(this.redirectRequest, 2000, id)
-      this.redirectRequest(id)
+      setTimeout(this.endLoading, 4000, loadingDiv);
+      setTimeout(this.redirectRequest, 2000, id)
     }else{ alert("Please use a supported browser for this feature, chrome, safari or firefox") }
 
 
